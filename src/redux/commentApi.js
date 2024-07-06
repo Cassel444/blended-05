@@ -9,9 +9,16 @@ export const commentApi = createApi({
     baseUrl: BASE_URL,
   }),
   tagTypes: ['Comments'],
-  endpoints: (builder) => ({
-    getComments: builder.query({ query: () => API_ENDPOINT })
+  endpoints: builder => ({
+    getComments: builder.query({ query: () => API_ENDPOINT }),
+    addComment: builder.mutation({
+      query: newComment => ({
+        url: API_ENDPOINT,
+        method: 'POST',
+        body: newComment,
+      }),
+    }),
   }),
 });
 
-export const { useGetCommentsQuery } = commentApi;
+export const { useGetCommentsQuery, useAddCommentMutation } = commentApi;
